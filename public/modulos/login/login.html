@@ -1,46 +1,280 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login — Registrar</title>
   <style>
-    :root{--blue:#232f5c;--accent:#27e37b;--card-bg:#ffffff;--card-shadow:0 30px 60px rgba(17,24,39,0.2);--radius:16px;--field-border:2px solid rgba(36,47,98,0.15)}
-    html,body{height:100%;margin:0;font-family:Inter, "Helvetica Neue", Arial, sans-serif;background:#ddd}
-    .container-login{display:flex;height:100vh;box-sizing:border-box;align-items:stretch}
-    .left{width:50vw;min-width:360px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:48px 64px;}
-    .logo{justify-content: center; display: flex; width: 45%; height: auto ;}
-    .image-card{width:420px;max-width:70%;border-radius:20px;overflow:hidden;background:#fff;filter: drop-shadow(3px 3px 5px #666);}
-    .image-card img{display:block;width:100%;height:auto;object-fit:cover; }
-    .right{width:50vw;min-width:420px;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:48px;position:relative}
-    .login-box{width:420px;max-width:90%;background:var(--card-bg);border-radius:20px;padding:36px;box-shadow:var(--card-shadow);color:#15223d}
-    .login-box h1{margin:0 0 18px 0;font-size:28px;color:#1b2a55}
-    .field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-    .field label{font-weight:700;font-size:13px;color:#243861}
-    .field input{height:40px;padding:8px 12px;border-radius:20px;border:var(--field-border);outline:none;font-size:14px}
-    .actions{display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:8px}
-    .btn-primary{width:160px;height:38px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(39,227,123,0.18)}
-    .btn-ghost{width:160px;height:36px;background:transparent;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:700;cursor:pointer}
-    .modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1200;padding:24px}
-    .modal-overlay.show{display:flex}
-    .modal-card{width:480px;max-width:100%;background:#fff;border-radius:16px;padding:22px;box-shadow:0 40px 80px rgba(8,15,30,0.35);position:relative}
-    .modal-card h2{margin:0 0 12px 0;color:#1b2a55}
-    .modal-card .field{margin-bottom:12px}
-    .modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:8px;border:0;background:transparent;cursor:pointer;font-size:20px;color:#556}
-    .modal-footer{display:flex;gap:12px;justify-content:flex-end;margin-top:10px}
-    @media (max-width:900px){.container-login{flex-direction:column}.left,.right{width:100%;min-width:0;height:auto}.left{padding:28px}.right{padding:36px}}
+    :root {
+      --blue: #232f5c;
+      --accent: #27e37b;
+      --card-bg: #ffffff;
+      --card-shadow: 1px 24px 160.9px -15px rgba(0, 0, 0, 0.25);
+      --radius: 16px;
+      --field-border: 2px solid #000;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      background: #ddd
+    }
+
+    .container-login {
+      display: flex;
+      height: 100vh;
+      box-sizing: border-box;
+      align-items: stretch
+    }
+
+    .left {
+      width: 50vw;
+      min-width: 360px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 48px 64px;
+    }
+
+    .logo {
+      justify-content: center;
+      display: flex;
+      width: 100%;
+      height: auto;
+    }
+
+    .image-card {
+      width: 420px;
+      max-width: 70%;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      filter: drop-shadow(3px 3px 5px #666);
+    }
+
+    .image-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .right {
+      width: 50vw;
+      min-width: 420px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative
+    }
+
+    .login-box {
+      width: 400px;
+      max-width: 90%;
+      height: 75%;
+      background: var(--card-bg);
+      /* border-radius: 20px; */
+      padding: 36px;
+      box-shadow: var(--card-shadow);
+      color: #15223d
+    }
+
+    .login-box h1 {
+      font-family: "Noto Serif", serif;
+
+      margin: 0 0 18px 0;
+      font-size: 35px;
+      font-weight: 500;
+      color: black;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px
+    }
+
+    .field label {
+      font-family: "Noto Serif", serif;
+      font-size: medium;
+      font-weight: 700;
+      font-size: 13px;
+      color: black;
+    }
+
+    .field input {
+      height: 23px;
+      padding: 8px 12px;
+      /* border-radius: 20px; */
+      border: var(--field-border);
+      outline: none;
+      font-size: 14px;
+      background: white;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      margin-top: 11%;
+    }
+
+    .noto-serif-musilife {
+      font-family: "Noto Serif", serif;
+      font-optical-sizing: auto;
+      font-weight: 800;
+      font-style: normal;
+      font-variation-settings:
+        "wdth" 100;
+    }
+
+    .btn-primary {
+      font-family: "Noto Serif", serif;
+      font-size: medium;
+      width: 160px;
+      height: 40px;
+      background: black;
+      border: none;
+      /* border-radius: 8px; */
+      color: #fff;
+      font-weight: bolder;
+      cursor: pointer;
+      /* box-shadow: 0 8px 18px rgba(39, 227, 123, 0.18) */
+    }
+
+    .btn-ghost {
+      font-size: medium;
+
+      font-family: "Noto Serif", serif;
+      width: 160px;
+      height: 40px;
+      background: transparent;
+      border: 2px solid black;
+      /* border-radius: 8px; */
+      color: black;
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1200;
+      padding: 24px
+    }
+
+    .modal-overlay.show {
+      display: flex
+    }
+
+    .modal-card {
+      width: 480px;
+      max-width: 100%;
+      background: #fff;
+      /* border-radius: 16px; */
+      padding: 22px;
+      box-shadow: 0 40px 80px rgba(8, 15, 30, 0.35);
+      position: relative
+    }
+
+    .modal-card h2 {
+      margin: 0 0 12px 0;
+      font-family: "Noto Serif", serif;
+      font-size: 25px;
+      color: black;
+    }
+
+    .modal-card .field {
+      margin-bottom: 12px
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      color: #556
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 10px
+    }
+    .logo_svg{
+      width: 70%;
+      height: auto;
+    }
+    .imgLine img{
+      width: 90%;
+      height: auto;
+    }
+    .imgLine{
+      margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    @media (max-width:900px) {
+      .container-login {
+        flex-direction: column
+      }
+
+      .left,
+      .right {
+        width: 100%;
+        min-width: 0;
+        height: auto
+      }
+
+      .left {
+        padding: 28px
+      }
+
+      .right {
+        padding: 36px
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="container-login">
     <div class="left">
       <div class="logo">
-        <img class="logo"src="../../images/iconLogo.png" alt="">
+        <svg class="logo_svg" xmlns="http://www.w3.org/2000/svg" width="365" height="92" viewBox="0 0 365 92"
+          fill="none">
+          <path
+            d="M82.328 7.43998C74.648 7.82399 74.008 8.84799 74.008 16.528V78.992C74.008 87.056 74.904 87.696 82.328 88.08V90H55.448V88.08C63.128 87.696 63.768 86.672 63.768 78.992V9.48799L40.728 90H34.328L11.8 12.432V78.992C11.8 87.056 12.696 87.696 20.12 88.08V90H0.92V88.08C8.856 87.696 9.24 86.672 9.24 78.992V16.528C9.24 8.46399 8.344 7.82399 0.92 7.43998V5.51999H21.016L41.368 78.736L62.36 5.51999H82.328V7.43998ZM137.212 78.352C137.212 86.544 137.468 87.824 144.252 88.08V90H127.356V85.264C127.356 82.576 127.484 79.632 127.868 77.2H127.356C125.564 83.088 120.956 91.024 110.844 91.024C103.292 91.024 95.1 86.544 95.1 74V42.768C95.1 33.936 94.844 33.296 88.06 33.04V31.12H104.956V71.44C104.956 80.144 107.516 85.264 114.428 85.264C125.308 85.264 127.356 71.952 127.356 61.712V42.768C127.356 33.936 127.1 33.296 120.316 33.04V31.12H137.212V78.352ZM179.902 59.792C185.918 63.76 189.502 68.496 189.502 75.792C189.502 86.928 180.542 91.024 168.638 91.024C163.006 91.024 155.454 89.488 151.87 86.672V72.976H153.79C155.198 82.704 160.574 89.104 168.254 89.104C175.166 89.104 180.03 85.776 180.03 77.84C180.03 71.824 176.062 68.752 171.838 66.064L161.598 59.536C155.71 55.824 151.87 51.6 151.87 44.944C151.87 34.832 160.83 30.096 171.198 30.096C177.598 30.096 183.742 31.504 187.582 34.704V48.144H185.662C184.638 39.184 179.646 32.016 171.582 32.016C164.926 32.016 160.83 35.728 160.83 41.872C160.83 46.864 163.39 48.912 167.742 51.728L179.902 59.792ZM209.104 19.984C205.52 19.984 202.576 16.912 202.576 13.2C202.576 9.61599 205.52 6.67199 209.104 6.67199C212.816 6.67199 215.888 9.61599 215.888 13.2C215.888 16.912 212.816 19.984 209.104 19.984ZM214.096 78.352C214.096 87.056 214.352 87.824 221.136 88.08V90H197.2V88.08C204.112 87.824 204.24 86.672 204.24 78.352V42.768C204.24 34.576 203.984 33.296 197.2 33.04V31.12H214.096V78.352ZM228.87 16.528C228.87 8.46399 227.974 7.82399 220.55 7.43998V5.51999H247.43V7.43998C239.75 7.82399 239.11 8.84799 239.11 16.528V78.608C239.11 86.8 242.31 88.08 248.838 88.08H253.574C261.894 88.08 268.678 83.344 269.318 71.44H271.238V90H220.55V88.08C228.23 87.696 228.87 86.672 228.87 78.992V16.528ZM282.554 19.984C278.97 19.984 276.026 16.912 276.026 13.2C276.026 9.61599 278.97 6.67199 282.554 6.67199C286.266 6.67199 289.338 9.61599 289.338 13.2C289.338 16.912 286.266 19.984 282.554 19.984ZM287.546 78.352C287.546 87.056 287.802 87.824 294.586 88.08V90H270.65V88.08C277.562 87.824 277.69 86.672 277.69 78.352V42.768C277.69 34.576 277.434 33.296 270.65 33.04V31.12H287.546V78.352ZM318.463 0.0159912C322.815 0.0159912 326.655 0.783989 330.239 2.83198V14.864H328.319C327.551 8.46399 324.095 1.93599 317.823 1.93599C312.319 1.93599 310.143 6.03199 310.143 12.304C310.143 18.832 311.551 20.752 311.551 27.28V31.12H322.431V33.04H311.551V78.352C311.551 87.312 311.935 87.824 320.511 88.08V90H294.655V88.08C301.567 87.824 301.695 86.672 301.695 78.352V33.04H294.655V31.12C300.799 31.12 301.695 30.48 301.695 23.44C301.695 10.512 305.663 0.0159912 318.463 0.0159912ZM347.54 86.416C352.788 86.416 358.804 84.112 361.748 79.888L362.772 81.424C358.804 87.824 351.508 91.024 343.7 91.024C329.236 91.024 320.66 79.248 320.66 60.56C320.66 41.744 328.852 30.096 343.572 30.096C358.804 30.096 364.052 41.36 364.052 57.616H330.9C331.156 73.104 335.764 86.416 347.54 86.416ZM342.932 32.016C333.204 32.016 331.028 44.304 330.9 55.696H353.812C354.068 39.824 351.636 32.016 342.932 32.016Z"
+            fill="black" />
+        </svg>
+        
       </div>
-      <div class="image-card">
-        <img src="../../images/loginPagePicture.png" alt="foto">
-      </div>
+<div class="imgLine">
+          <img src="../../assets/lineDraw.svg" alt="">
+        </div>
     </div>
     <div class="right">
       <div class="login-box" role="region" aria-label="Login">
@@ -48,11 +282,12 @@
         <form id="loginForm" novalidate>
           <div class="field">
             <label for="username">Login</label>
-            <input id="username" name="username" type="text" placeholder="Email:" autocomplete="username" required>
+            <input id="username" name="username" type="text" placeholder="Login:" autocomplete="username" required>
           </div>
           <div class="field">
             <label for="password">Senha</label>
-            <input id="password" name="password" type="password" placeholder="Senha:" autocomplete="current-password" required>
+            <input id="password" name="password" type="password" placeholder="Senha:" autocomplete="current-password"
+              required>
           </div>
           <div class="actions">
             <button type="submit" class="btn-primary">Entrar</button>
@@ -63,7 +298,8 @@
     </div>
   </div>
 
-  <div id="registerModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="registerTitle">
+  <div id="registerModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-labelledby="registerTitle">
     <div class="modal-card" role="document">
       <button class="modal-close" id="closeModal" aria-label="Fechar">×</button>
       <h2 id="registerTitle">Novo usuário</h2>
@@ -106,16 +342,16 @@
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
 
-    function showModal(){
+    function showModal() {
       modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       document.getElementById('txt_login').focus();
     }
 
-    function hideModal(){
+    function hideModal() {
       modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       openBtn.focus();
     }
@@ -123,16 +359,16 @@
     openBtn.addEventListener('click', showModal);
     closeBtn.addEventListener('click', hideModal);
     cancelBtn.addEventListener('click', hideModal);
-    modal.addEventListener('click', (ev)=>{ if(ev.target === modal) hideModal(); });
-    document.addEventListener('keydown', (ev)=>{ if(ev.key === 'Escape' && modal.classList.contains('show')) hideModal(); });
+    modal.addEventListener('click', (ev) => { if (ev.target === modal) hideModal(); });
+    document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && modal.classList.contains('show')) hideModal(); });
 
-    loginForm.addEventListener('submit', function(e){
+    loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value;
-      if(typeof loginUser === 'function'){
-        const ok = loginUser(u,p);
-        if(ok){
+      if (typeof loginUser === 'function') {
+        const ok = loginUser(u, p);
+        if (ok) {
           const returnURL = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('returnURL') : null;
           const target = returnURL || (typeof RETURN_URL !== 'undefined' ? RETURN_URL : '/');
           window.location.href = target;
@@ -144,15 +380,15 @@
       }
     });
 
-    registerForm.addEventListener('submit', function(e){
+    registerForm.addEventListener('submit', function (e) {
       e.preventDefault();
       const login = document.getElementById('txt_login').value.trim();
       const nome = document.getElementById('txt_nome').value.trim();
       const email = document.getElementById('txt_email').value.trim();
       const senha = document.getElementById('txt_senha').value;
       const senha2 = document.getElementById('txt_senha2').value;
-      if(senha !== senha2){ alert('As senhas informadas não conferem.'); return; }
-      if(typeof addUser === 'function'){
+      if (senha !== senha2) { alert('As senhas informadas não conferem.'); return; }
+      if (typeof addUser === 'function') {
         addUser(nome, login, senha, email);
         alert('Usuário salvo com sucesso.');
         hideModal();
@@ -165,4 +401,5 @@
   </script>
 
 </body>
+
 </html>
