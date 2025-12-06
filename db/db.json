@@ -5,7 +5,10 @@
       "login": "admin",
       "senha": "123",
       "nome": "João Bicalho",
-      "email": "joaobicalho03@gamil.com"
+      "email": "joaobicalho03@gamil.com",
+      "favoritos": [1206014,328136527,2,146933722],
+      "seguidores": 100,
+      "seguindo": 0
     },
     {
       "id": "ce536e93-1d58-48f4-aaf8-4d7af0932d16",
