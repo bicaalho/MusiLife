@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Registrar</title>
+  <style>
+    :root{--blue:#232f5c;--accent:#27e37b;--card-bg:#ffffff;--card-shadow:0 30px 60px rgba(17,24,39,0.2);--radius:16px;--field-border:2px solid rgba(36,47,98,0.15)}
+    html,body{height:100%;margin:0;font-family:Inter, "Helvetica Neue", Arial, sans-serif;background:#ddd}
+    .container-login{display:flex;height:100vh;box-sizing:border-box;align-items:stretch}
+    .left{width:50vw;min-width:360px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:48px 64px;}
+    .logo{justify-content: center; display: flex; width: 45%; height: auto ;}
+    .image-card{width:420px;max-width:70%;border-radius:20px;overflow:hidden;background:#fff;filter: drop-shadow(3px 3px 5px #666);}
+    .image-card img{display:block;width:100%;height:auto;object-fit:cover; }
+    .right{width:50vw;min-width:420px;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:48px;position:relative}
+    .login-box{width:420px;max-width:90%;background:var(--card-bg);border-radius:20px;padding:36px;box-shadow:var(--card-shadow);color:#15223d}
+    .login-box h1{margin:0 0 18px 0;font-size:28px;color:#1b2a55}
+    .field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+    .field label{font-weight:700;font-size:13px;color:#243861}
+    .field input{height:40px;padding:8px 12px;border-radius:20px;border:var(--field-border);outline:none;font-size:14px}
+    .actions{display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:8px}
+    .btn-primary{width:160px;height:38px;background:var(--accent);border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(39,227,123,0.18)}
+    .btn-ghost{width:160px;height:36px;background:transparent;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:700;cursor:pointer}
+    .modal-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1200;padding:24px}
+    .modal-overlay.show{display:flex}
+    .modal-card{width:480px;max-width:100%;background:#fff;border-radius:16px;padding:22px;box-shadow:0 40px 80px rgba(8,15,30,0.35);position:relative}
+    .modal-card h2{margin:0 0 12px 0;color:#1b2a55}
+    .modal-card .field{margin-bottom:12px}
+    .modal-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:8px;border:0;background:transparent;cursor:pointer;font-size:20px;color:#556}
+    .modal-footer{display:flex;gap:12px;justify-content:flex-end;margin-top:10px}
+    @media (max-width:900px){.container-login{flex-direction:column}.left,.right{width:100%;min-width:0;height:auto}.left{padding:28px}.right{padding:36px}}
+  </style>
+</head>
+<body>
+  <div class="container-login">
+    <div class="left">
+      <div class="logo">
+        <img class="logo"src="../../images/iconLogo.png" alt="">
+      </div>
+      <div class="image-card">
+        <img src="../../images/loginPagePicture.png" alt="foto">
+      </div>
+    </div>
+    <div class="right">
+      <div class="login-box" role="region" aria-label="Login">
+        <h1>Entrar</h1>
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="username">Login</label>
+            <input id="username" name="username" type="text" placeholder="Email:" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="password">Senha</label>
+            <input id="password" name="password" type="password" placeholder="Senha:" autocomplete="current-password" required>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn-primary">Entrar</button>
+            <button type="button" id="openRegister" class="btn-ghost">Registrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="registerTitle">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeModal" aria-label="Fechar">×</button>
+      <h2 id="registerTitle">Novo usuário</h2>
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="txt_login">Usuário</label>
+          <input id="txt_login" name="txt_login" type="text" required>
+        </div>
+        <div class="field">
+          <label for="txt_nome">Nome completo</label>
+          <input id="txt_nome" name="txt_nome" type="text" required>
+        </div>
+        <div class="field">
+          <label for="txt_email">Email</label>
+          <input id="txt_email" name="txt_email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="txt_senha">Senha</label>
+          <input id="txt_senha" name="txt_senha" type="password" required>
+        </div>
+        <div class="field">
+          <label for="txt_senha2">Confirmação de Senha</label>
+          <input id="txt_senha2" name="txt_senha2" type="password" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancelModal" class="btn-ghost">Cancelar</button>
+          <button id="btn_salvar" type="submit" class="btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../js/login.js"></script>
+
+  <script>
+    const openBtn = document.getElementById('openRegister');
+    const modal = document.getElementById('registerModal');
+    const closeBtn = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelModal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    function showModal(){
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('txt_login').focus();
+    }
+
+    function hideModal(){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', showModal);
+    closeBtn.addEventListener('click', hideModal);
+    cancelBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (ev)=>{ if(ev.target === modal) hideModal(); });
+    document.addEventListener('keydown', (ev)=>{ if(ev.key === 'Escape' && modal.classList.contains('show')) hideModal(); });
+
+    loginForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      if(typeof loginUser === 'function'){
+        const ok = loginUser(u,p);
+        if(ok){
+          const returnURL = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('returnURL') : null;
+          const target = returnURL || (typeof RETURN_URL !== 'undefined' ? RETURN_URL : '/');
+          window.location.href = target;
+        } else {
+          alert('Usuário ou senha incorretos');
+        }
+      } else {
+        alert('Função de login não disponível');
+      }
+    });
+
+    registerForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const login = document.getElementById('txt_login').value.trim();
+      const nome = document.getElementById('txt_nome').value.trim();
+      const email = document.getElementById('txt_email').value.trim();
+      const senha = document.getElementById('txt_senha').value;
+      const senha2 = document.getElementById('txt_senha2').value;
+      if(senha !== senha2){ alert('As senhas informadas não conferem.'); return; }
+      if(typeof addUser === 'function'){
+        addUser(nome, login, senha, email);
+        alert('Usuário salvo com sucesso.');
+        hideModal();
+      } else {
+        alert('Função de adicionar usuário não disponível.');
+        hideModal();
+      }
+    });
+
+    if(typeof carregarUsuarios === 'function') carregarUsuarios(()=>{});
+  </script>
+
+</body>
+</html>

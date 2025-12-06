@@ -1,0 +1,1052 @@
+@import url('https://fonts.googleapis.com/css2?family=Federo&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+html, body {
+    width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.emailInfo{
+    color: aliceblue;
+}
+
+header {
+    width: 95%;
+    height: 80px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    margin-top: -80px;
+    z-index: 3;
+}
+
+.container_cards {
+    width: 200px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo_svg {
+    width: 300px;
+    height: auto;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #767676;
+    padding: 5px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-bar svg {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.profilePicture {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    margin-top: 80px;
+}
+
+.gallery {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    padding: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    justify-items: center;
+}
+
+.infos{
+    width: 20%;
+}
+
+.cards {
+    display: block;
+    width: 200px;
+    height: 197.37px;
+    /* border: 1px solid #ddd; */
+    overflow: hidden;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+
+}
+
+.imageCard {
+    width: 200px;
+    height: 100%;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.caption {
+    padding: 8px 0 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 200px;
+}
+
+aside {
+    width: 17%;
+    /* border: 2px solid red; */
+}
+
+.imageCard:hover {
+    /* lol :p */
+    filter: brightness(0.92);
+    /* transform: scale(1.06);  */
+    /* filter: drop-shadow(5px 5px 40px rgba(0, 0, 0, 0.08)); */
+    border-radius: 5px;
+    
+}
+
+nav {
+    padding: 22%;
+}
+
+a {
+    cursor: pointer;
+}
+
+.formularioUsuario {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex-direction: row;
+    background: white;
+    padding: 10px;
+    align-content: center;
+    /* text-align: center; */
+    /* font-family: 'Times New Roman', Times, serif; */
+}
+
+@font-face {
+    font-family: 'RotwangPro';
+    src: url('../assets/fonnts.com-rotwangpro-medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Askan';
+    src: url('../assets/Hoftype  Askan.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.information {
+    margin-bottom: 0px;
+    margin-top: 1px;
+    font-family: "Askan", sans-serif;
+    font-size: small;
+    font-weight: 500;
+    align-self: flex-start;
+    color: grey;
+    
+}
+
+.informationTitle {
+    max-width: 150px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+    font-family: "Askan", sans-serif;
+    font-size: medium;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.infoPrincipal {
+    justify-content: center;
+}
+
+.logoLi {
+    width: 50px;
+    height: auto;
+}
+
+.search_input {
+    background-color: transparent;
+}
+
+.AlbumCover {
+    width: 60%;
+    height: auto;
+}
+
+.alternativeCovers {
+    width: auto;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+    direction: rtl;
+    display: flex;
+    scrollbar-width: thin;
+}
+
+.asideInfo {
+    width: 20%  ;
+    padding: 60px;
+    padding-left: 4%;
+    padding-right: 0px;
+    padding-top: 10px;
+}
+
+.introducaoAlbum {
+    font-family: "Askan", sans-serif;
+    text-align: justify;
+    font-size: 20px;
+}
+
+.albumCoverInfos {
+    display: flex;
+    justify-content: center;
+}
+
+.bttnML {
+    padding-top: 4.5px;
+}
+
+.infoAtAll {
+    padding: 0px;
+    padding-top: 10px;
+    /* font-family: "RotwangPro", sans-serif;; */
+    /* AJEITAR ISSO DEOPOIS QUE AUMENTAR A IMAGEM DA CAPA NAS INFOS E MUDAR A FONTE DO TEXTO */
+}
+
+.albumInfos {
+    text-align: center;
+}
+
+.mainInfos {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2%;
+    margin-right: 2%;
+    gap: 7%;
+    padding-top: 40px;
+}
+
+.albumTitleInfo {
+    font-size: 50px;
+    margin: 0px 0px -10px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+.albumArtistInfo {
+    font-size: 33px;
+    margin: 0px 0px -3px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+.albumYearInfo {
+    font-size: 24px;
+    margin: 2px 0px 0px;
+    font-family: "Federo", sans-serif;
+    font-weight: 500;
+}
+
+.alternativeCoverTitle {
+    margin: 0px 0px 0px;
+    font-size: 25px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 100;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+h1.alternativeCoverTitle{
+    align-self: center;
+}
+
+.mainInformation {
+    width: 100%;
+    font-size: 18px;
+    font-family: "Askan", sans-serif;
+    padding-top: 10px;
+    padding-left: 9px;
+}
+
+.producerInfo {
+    font-size: 22px;
+    text-align: justify;
+    color: #767676;
+    font-family: "Askan", sans-serif;
+}
+
+
+.lpStyle {
+    width: 140px;
+    height: auto;
+}
+
+.containerInfo {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+
+.imageAlternativeCover {
+    margin-right: 20%;
+    padding-top: 40px;
+    margin-bottom: -40px;
+    position: relative; /* container relativo para controlar sobreposição */
+    width: 130px;       /* largura do bloco */
+    height: 150px;      /* altura do bloco */
+}
+
+.imageAlternativeCover svg {
+    position: relative; /* fica na frente */
+    z-index: 2;
+    /* width: 50%; */
+    height: 50%;
+    margin-left: 0px;
+}
+
+.imageAlternativeCover img.lpStyle {
+    position: absolute; /* fica atrás */
+    top: 34.0%;           /* centraliza verticalmente */
+    left: 21%;          /* centraliza horizontalmente */
+    transform: translate(0%, -50%) scale(0.54); /* ajusta tamanho e posicionamento */
+    z-index: 1;
+    pointer-events: none; /* evita interferir no clique do SVG */
+
+}
+
+.genreInfo{
+    color: #767676;
+    font-weight: 100;
+    font-size: 21px;
+    font-family: "Askan", sans-serif;
+}
+
+.tracklist{
+    line-height: 30px;
+}
+
+.about{
+    width: 90%;
+}
+.stars {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.star.hover,
+.star.active {
+  color: gold;
+}
+
+.albumDurationInfo{
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.producesTextStyle{
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.error-message{
+    display: flex;
+    flex-direction: column;
+    font-family: "Askan";
+    font-size: 20px;
+   align-items: center;
+}
+.frameErro{
+    border: none;
+}
+.mainFooter{
+    background-color: black;
+    height: 170px;
+    margin: 0px;
+}
+
+.hrTam{
+    width: 90%;
+}
+@media screen and (max-width:600px) {
+    .mainInfos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    align-items: center;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+html, body {
+    width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+
+.containerInfo {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+}
+
+
+.alternativeCoverTitle {
+    margin: 0px 0px 0px;
+    font-size: 25px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 100;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+.alternativeCovers {
+    display: hidden;
+    width: auto;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+    direction: rtl;
+    display: flex;
+    scrollbar-width: thin;
+}
+
+.imageAlternativeCover {
+    margin-right: 20%;
+    padding-top: 40px;
+    margin-bottom: -40px;
+    position: relative; /* container relativo para controlar sobreposição */
+    width: 130px;       /* largura do bloco */
+    height: 150px;      /* altura do bloco */
+}
+
+.mainInformation {
+    order: 1;
+    width: 87%;
+    font-size: 18px;
+    font-family: "Askan", sans-serif;
+    padding-top:0px;
+    padding-left: 0px;
+}
+
+
+
+.introducaoAlbum {
+    font-family: "Askan", sans-serif;
+    text-align: justify;
+    font-size: 16px;
+}
+
+
+.about{
+    width: 85%;
+    order: 0;
+}
+
+.albumCoverInfos {
+    display: flex;
+    justify-content: center;
+}
+
+.AlbumCover {
+    width: 60%;
+    height: auto;
+}
+
+.infoAtAll {
+    padding: 0px;
+    padding-top: 10px;
+    /* font-family: "RotwangPro", sans-serif;; */
+    /* AJEITAR ISSO DEOPOIS QUE AUMENTAR A IMAGEM DA CAPA NAS INFOS E MUDAR A FONTE DO TEXTO */
+}
+
+
+.albumInfos {
+    text-align: center;
+}
+
+
+.albumTitleInfo {
+    font-size: 290%;
+    margin: 20px 0px -10px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+.albumArtistInfo {
+    font-size: 175%;
+    margin: 9px 0px 2px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+
+
+.albumYearInfo {
+    font-size: 24px;
+    margin: 2px 0px 0px;
+    font-family: "Federo", sans-serif;
+    font-weight: 500;
+}
+
+
+.producerInfo {
+    font-size: 22px;
+    text-align: justify;
+    color: #767676;
+    font-family: "Askan", sans-serif;
+}
+
+
+.producesTextStyle{
+    font-size: 16px;
+    margin-top: 8%;
+    margin-bottom: 0px;
+}
+
+.genreInfo{
+    color: #767676;
+    font-weight: 100;
+    font-size: 15px;
+    font-family: "Askan", sans-serif;
+}
+
+.informationTitle {
+
+    margin-top: 0px;
+    font-family: "Inter", sans-serif;
+    
+}
+
+    header {
+        width: 100%;
+        height: 80px;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        padding: 0px 0px;
+    }
+
+
+    .logo_svg {
+        width: 270px;
+        height: auto;
+        margin-left: 18px;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        /* gap: 20px; */
+    }
+
+    .search-bar {
+        display: none;
+        align-items: center;
+        border-bottom: 1px solid #767676;
+        padding: 5px;
+    }
+
+    .search-bar input {
+        display: none;
+        border: none;
+        outline: none;
+        font-size: 5px;
+
+    }
+
+    .search-bar svg {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .profilePicture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    main {
+        flex: 1;
+
+    }
+
+    .gallery {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    justify-items: center;
+}
+    .cards {
+        display: block;
+        width: 150px;
+        height: 65, 79px;
+        /* border: 1px solid #ddd; */
+        overflow: hidden;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .imageCard {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .caption {
+        padding: 8px 0 0 0;
+        font-size: 13px;
+        line-height: 1.4;
+        margin-top: 200px;
+    }
+
+    aside {
+        display: none;
+        /* border: 2px solid red; */
+    }
+
+
+    
+
+    nav {
+        padding: 22%;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .formularioUsuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: row;
+        background: white;
+        padding: 10px;
+        align-content: center;
+        /* text-align: center; */
+        /* font-family: 'Times New Roman', Times, serif; */
+    }
+
+    @font-face {
+        font-family: 'RotwangPro';
+        src: url('../assets/fonnts.com-rotwangpro-medium.otf');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .information {
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-family: "Inter", sans-serif;
+        font-size: small;
+        font-weight: 600;
+        max-width: 150px;
+        color: grey;
+    }
+
+    .infoPrincipal {
+        justify-content: center;
+    }
+
+    .logoLi {
+        width: 50px;
+        height: auto;
+    }
+
+    .search_input {
+        background-color: transparent;
+    }
+
+    .profileButton {
+        margin-top: 15px;
+        margin-right: 18px;
+    }
+
+    .container_cards {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+
+    .mainInfos {
+    justify-content: center;
+    column-gap: 4%;
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    padding-top: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+    
+}
+html, body {
+    width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+
+.containerInfo {
+    flex: 1 1 45%;
+    display: block;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.containerInfo:last-child {
+  flex: 1 1 100%;
+}
+
+
+.alternativeCoverTitle {
+    margin: 0px 0px 0px;
+    font-size: 25px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 100;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+.alternativeCovers {
+    display: hidden;
+    width: auto;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+    direction: rtl;
+    display: flex;
+    scrollbar-width: thin;
+}
+
+.imageAlternativeCover {
+    margin-right: 20%;
+    padding-top: 40px;
+    margin-bottom: -40px;
+    position: relative; /* container relativo para controlar sobreposição */
+    width: 130px;       /* largura do bloco */
+    height: 150px;      /* altura do bloco */
+}
+
+.mainInformation {
+    order: 1;
+    width: 40%;
+    font-size: 18px;
+    font-family: "Askan", sans-serif;
+    padding-top:0px;
+    padding-left: 0px;
+}
+
+
+
+.introducaoAlbum {
+    font-family: "Askan", sans-serif;
+    text-align: justify;
+    font-size: 16px;
+}
+
+
+.about{
+    width: 50%;
+    order: 0;
+}
+
+.albumCoverInfos {
+    display: flex;
+    justify-content: center;
+}
+
+.AlbumCover {
+    width:60%;
+    height: auto;
+}
+
+.infoAtAll {
+    padding: 0px;
+    padding-top: 10px;
+    /* font-family: "RotwangPro", sans-serif;; */
+    /* AJEITAR ISSO DEOPOIS QUE AUMENTAR A IMAGEM DA CAPA NAS INFOS E MUDAR A FONTE DO TEXTO */
+}
+
+
+.albumInfos {
+    text-align: center;
+}
+
+
+.albumTitleInfo {
+    font-size: 290%;
+    margin: 0px 0px -10px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+.albumArtistInfo {
+    font-size: 175%;
+    margin: 9px 0px 2px;
+    font-family: "RotwangPro", sans-serif;
+    font-weight: 500;
+}
+
+
+
+.albumYearInfo {
+    font-size: 24px;
+    margin: 2px 0px 0px;
+    font-family: "Federo", sans-serif;
+    font-weight: 500;
+}
+
+
+.producerInfo {
+    font-size: 22px;
+    text-align: justify;
+    color: #767676;
+    font-family: "Askan", sans-serif;
+}
+
+
+.producesTextStyle{
+    font-size: 16px;
+    margin-top: 8%;
+    margin-bottom: 0px;
+}
+
+.genreInfo{
+    color: #767676;
+    font-weight: 100;
+    font-size: 15px;
+    font-family: "Askan", sans-serif;
+}
+
+.informationTitle {
+
+    margin-top: 0px;
+    font-family: "Inter", sans-serif;
+    
+}
+    header {
+        width: 95%;
+        height: 80px;
+        position: fixed;
+        /* display: flex; */
+        align-items: center;
+        padding: 0px 0px;
+    }
+
+
+    .logo_svg {
+        width: 270px;
+        height: auto;
+        margin-left: 18px;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        /* gap: 20px; */
+    }
+
+    .search-bar {
+        align-items: center;
+        border-bottom: 1px solid #767676;
+        padding: 5px;
+    }
+
+    .search-bar input {
+
+        border: none;
+        outline: none;
+        font-size: 10px;
+
+    }
+
+    .search-bar svg {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .profilePicture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    main {
+        align-self: center;
+        justify-content: center;
+        flex: 1;
+
+    }
+
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cards {
+        display: block;
+        width: 150px;
+        height: 65, 79px;
+        /* border: 1px solid #ddd; */
+        overflow: hidden;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .imageCard {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .caption {
+        padding: 8px 0 0 0;
+        font-size: 13px;
+        line-height: 1.4;
+        margin-top: 200px;
+    }
+
+    aside {
+        display: none;
+        width: 30%;
+        /* border: 2px solid red; */
+    }
+
+
+    nav {
+        padding: 22%;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    .formularioUsuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        flex-direction: row;
+        background: white;
+        padding: 10px;
+        align-content: center;
+        /* text-align: center; */
+        /* font-family: 'Times New Roman', Times, serif; */
+    }
+
+    @font-face {
+        font-family: 'RotwangPro';
+        src: url('../assets/fonnts.com-rotwangpro-medium.otf');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    .information {
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-family: "Inter", sans-serif;
+        font-size: x-small;
+        font-weight: 600;
+        color: grey;
+    }
+
+    .infoPrincipal {
+        justify-content: center;
+    }
+
+    .logoLi {
+        width: 50px;
+        height: auto;
+    }
+
+    .search_input {
+        background-color: transparent;
+    }
+
+    .profileButton {
+        margin-top: 15px;
+        margin-right: 18px;
+    }
+
+    .container_cards {
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+    }
+}
