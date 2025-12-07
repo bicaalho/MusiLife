@@ -4,9 +4,17 @@ export class ProfilePage {
         this.infos = document.querySelector(".profileInf");
     }
 
-    render(user, archives) {
+    render(user, archives, caches) {
         if (!this.infos) return;
         this.infos.innerHTML = "";
+        this.header = document.querySelector(".profileButton");
+
+        const imgProfile = document.createElement("img");
+        imgProfile.classList.add("profilePicture");
+        imgProfile.src = `${user.profileImg || '../assets/defaultProfile.png'}`;
+        
+
+        this.header.appendChild(imgProfile);
 
         const container = document.createElement("div");
         container.classList.add("containerProfile");
@@ -36,7 +44,7 @@ export class ProfilePage {
         const imgContainer = document.createElement("div");
         imgContainer.classList.add("imgContainer");
         imgContainer.innerHTML = `
-            <img src="../assets/fotoPerfilQuadrada.jpg">
+            <img src=${user.profileImg || "../assets/defaultProfile.png"} >
         `;
 
         //botoes editar perfil e compartilhar
@@ -52,7 +60,8 @@ export class ProfilePage {
         carousel.setAttribute("height", "26px");
 
         // desenhando itens do carrossel
-
+        const favTitle = document.createElement("h1");
+        favTitle.textContent = `Favoritos`;
         carousel.draw(archives, (archive) => {
             const wrapper = document.createElement("a");
             const href = `../pages/details.html?type=${encodeURIComponent(archive.type || 'archive')}&id=${encodeURIComponent(archive.id)}`;
@@ -63,14 +72,40 @@ export class ProfilePage {
             return wrapper;
         });
 
+        const recenTitle = document.createElement("h1");
+        recenTitle.textContent = "Sua Coleção";
+        recenTitle.style.marginBottom = '15px';
+        recenTitle.style.width = 'fit-content';
+        recenTitle.style.cursor = 'pointer';
 
+        const gridContainer = document.createElement("div");
+        gridContainer.classList.add("girdLibrary");
+
+
+        //SUA COLEÇÃO (LIBRARY)
+        caches.forEach(cache => {
+            const card = document.createElement("div");
+            card.classList.add("coverLibrary");
+            card.innerHTML=`
+                <img src="${cache.img}">
+            `;
+        gridContainer.appendChild(card);
+        });
+
+        const libraryContainer = document.createElement("div");
+        libraryContainer.classList.add("libraryContainerProfile");
+
+        libraryContainer.appendChild(recenTitle);
+        libraryContainer.appendChild(gridContainer);
         //area dos appends
         right.appendChild(imgContainer);
         head.appendChild(left);
         head.appendChild(right);
         container.appendChild(head);
         container.appendChild(buttonContainer);
+        container.appendChild(favTitle);
         container.appendChild(carousel);
+        container.appendChild(libraryContainer);
         this.infos.appendChild(container);
     }
 

@@ -13,15 +13,13 @@ export class ProfilePageController{
     async init(){
         const currentUser = await this.userController.getUser();
 
-        let i = 9;
         const itens = currentUser.favoritos;
         const favs = await this.archiveController.translate(itens);
 
-        let j=0;
-        favs.forEach(fav => {
-            console.log(j++ +fav.img);
-        });
+        const libraryItemsRaw = currentUser.library;
+        const libraryItems = await this.archiveController.translate(libraryItemsRaw);
         
-        this.view.render(currentUser, favs);
+        
+        this.view.render(currentUser, favs, libraryItems);
     }
 }

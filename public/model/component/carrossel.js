@@ -36,6 +36,8 @@ class CarrosselSlider extends HTMLElement {
 
         .item img{
                   box-shadow: 0 3px 13.2px 0 rgba(0, 0, 0, 0.25);
+                  border-radius: 3px;
+
 }
 
         .btn {

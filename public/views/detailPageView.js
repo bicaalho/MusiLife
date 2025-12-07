@@ -25,6 +25,8 @@ export default class DetailPage {
             </div>
         `;
         this.mainInfos.appendChild(asideContainerInfo);
+
+
         //cria o article
         const articleMainDetails = document.createElement("article");
         articleMainDetails.classList.add("mainInformation");
@@ -50,9 +52,11 @@ export default class DetailPage {
                     <h3 class="albumYearInfo">${archive.year || 'Ano desconhecido'}</h3>
                     ${this.renderDuration(archive)}
                 </div>
+                <div class="estrelas"></div>
                 <div id="rating" class="stars">
                     <canvas id="ratingChart" aria-label="Gráfico de avaliações" role="img"></canvas>
                 </div>
+                
 
                 ${this.renderProducerInfo(archive)}
                 ${this.renderGenreInfo(archive)}
@@ -72,8 +76,13 @@ export default class DetailPage {
             });
         }
         await this.ensureChartJs();
+
+        this.mountStarsUI(archive)
+        this.mountHeartUI(archive);
         this.drawRatingChart(rating);
+
     }
+
 
     drawRatingChart(counts = [0, 0, 0, 0, 0]) {
         const canvas = document.getElementById('ratingChart');
@@ -157,8 +166,8 @@ export default class DetailPage {
                 datasets: [{
                     label: '',
                     data: counts,
-                    backgroundColor: 'black',
-                    borderColor: 'black',
+                    backgroundColor: '#282828',
+                    borderColor: '#282828',
                     borderWidth: 1,
                     borderRadius: {
                         topLeft: 6,
@@ -257,6 +266,278 @@ export default class DetailPage {
             </div>
         `;
     }
+
+    async handleCreateRating(archiveId, stars) {
+        try {
+            const rawUser = sessionStorage.getItem("usuarioCorrente");
+            if (!rawUser) throw new Error('Usuário não logado');
+            const user = JSON.parse(rawUser);
+            const { RatingController } = await import("../controller/ratingController.js");
+            const ratingController = new RatingController();
+
+            // buscar ratings do usuário e ver se já existe para esse archiveId
+            const userRatings = await ratingController.getByUserId(user.id);
+            const existing = userRatings.find(r => Number(r.archiveId) === Number(archiveId));
+
+            let result;
+            if (existing) {
+                // atualiza
+                result = await ratingController.update(existing.id, { stars: Number(stars) });
+                console.log('Rating atualizado', result);
+            } else {
+                // cria novo
+                const payload = {
+                    archiveId: Number(archiveId),
+                    stars: Number(stars),
+                    userId: user.id
+                };
+                result = await ratingController.create(payload);
+                console.log('Rating criado', result);
+            }
+
+            this.showTemporaryMessage(`Obrigado! Você avaliou ${stars} ★`);
+            // opcional: atualiza gráfico ou contadores aqui (se quiser)
+            return result;
+        } catch (err) {
+            console.error('Erro criando/atualizando rating', err);
+            this.showTemporaryMessage('Erro ao salvar avaliação');
+        }
+    }
+
+
+    showTemporaryMessage(msg, timeout = 1600) {
+        let el = document.querySelector('.tmp-message');
+        if (!el) {
+            el = document.createElement('div');
+            el.className = 'tmp-message';
+            Object.assign(el.style, {
+                position: 'fixed',
+                right: '16px',
+                top: '16px',
+                background: 'rgba(0,0,0,0.8)',
+                color: '#fff',
+                padding: '8px 12px',
+                borderRadius: '8px',
+                zIndex: 9999,
+                fontSize: '14px'
+            });
+            document.body.appendChild(el);
+        }
+        el.textContent = msg;
+        el.style.opacity = '1';
+        setTimeout(() => el.style.opacity = '0', timeout);
+    }
+
+   mountStarsUI(archive, initialValue = 0) {
+    // pegar a DIV .estrelas (não usar #rating)
+    const ratingDiv = document.querySelector('.estrelas');
+    if (!ratingDiv) return;
+
+    // limpa conteúdo anterior
+    ratingDiv.innerHTML = '';
+
+    const container = document.createElement('div');
+    container.className = 'rating-widget';
+    Object.assign(container.style, { display: 'flex', alignItems: 'center', gap: '10px' });
+
+    const starsWrapper = document.createElement('div');
+    starsWrapper.className = 'stars-wrapper';
+    Object.assign(starsWrapper.style, { display: 'flex', cursor: 'pointer', userSelect: 'none', alignItems: 'center' });
+
+    // SVG base da estrela (contorno)
+    const starSvg = encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1">
+            <path d="M12 .587l3.668 7.431L24 9.748l-6 5.854 1.416 8.266L12 19.771 4.584 23.868 6 15.6 0 9.748l8.332-1.73z"/>
+        </svg>`
+    );
+
+    const paint = (value) => {
+        const children = starsWrapper.children;
+        for (let i = 0; i < 5; i++) {
+            const starEl = children[i];
+            const starIndex = i + 1;
+            let fill = 0;
+            if (value >= starIndex) fill = 1;
+            else if (value >= (starIndex - 0.5)) fill = 0.5;
+            else fill = 0;
+
+            if (fill === 1) {
+                starEl.style.background = `linear-gradient(90deg, #FFD54A 100%, transparent 0), url("data:image/svg+xml;utf8,${starSvg}")`;
+            } else if (fill === 0.5) {
+                starEl.style.background = `linear-gradient(90deg, #FFD54A 50%, transparent 50%), url("data:image/svg+xml;utf8,${starSvg}")`;
+            } else {
+                starEl.style.background = `linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%), url("data:image/svg+xml;utf8,${starSvg}")`;
+            }
+            starEl.style.backgroundRepeat = 'no-repeat, no-repeat';
+            starEl.style.backgroundPosition = 'left center, center';
+            starEl.style.backgroundSize = '100% 100%, 20px 20px';
+        }
+    };
+
+    for (let i = 0; i < 5; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        Object.assign(s.style, {
+            width: '30px',
+            height: '30px',
+            display: 'inline-block',
+            borderRadius: '4px',
+            overflow: 'hidden',
+            transition: 'background 120ms ease'
+        });
+
+        s.addEventListener('mousemove', (ev) => {
+            const rect = s.getBoundingClientRect();
+            const x = ev.clientX - rect.left;
+            const half = rect.width / 2;
+            const starIndex = i + 1;
+            const value = x < half ? (starIndex - 0.5) : starIndex;
+            paint(value);
+            s.dataset.hoverValue = String(value);
+        });
+
+        s.addEventListener('mouseleave', () => {
+            const selected = starsWrapper.dataset.selectedValue ? Number(starsWrapper.dataset.selectedValue) : 0;
+            paint(selected);
+        });
+
+        s.addEventListener('click', async () => {
+            const value = s.dataset.hoverValue ? Number(s.dataset.hoverValue) : (i + 1);
+            // cria ou atualiza rating
+            await this.handleCreateRating(archive.id, value);
+            starsWrapper.dataset.selectedValue = String(value);
+            paint(value);
+        });
+
+        starsWrapper.appendChild(s);
+    }
+
+    starsWrapper.addEventListener('mouseleave', () => {
+        const selected = starsWrapper.dataset.selectedValue ? Number(starsWrapper.dataset.selectedValue) : 0;
+        paint(selected);
+    });
+
+    const info = document.createElement('div');
+    info.className = 'rating-text';
+    info.textContent = 'Clique para avaliar';
+    Object.assign(info.style, { fontSize: '13px', color: '#333' });
+
+    container.appendChild(starsWrapper);
+    container.appendChild(info);
+    ratingDiv.appendChild(container);
+
+    // se veio initialValue (ex.: 3.5) marca como selecionado
+    if (initialValue && Number(initialValue) > 0) {
+        starsWrapper.dataset.selectedValue = String(initialValue);
+        paint(Number(initialValue));
+    } else {
+        paint(0);
+    }
+}
+
+
+    // monta o coração (favoritar)
+    // monta o coração (favoritar) — usa também .estrelas (mas adiciona em container próprio dentro dela)
+    async mountHeartUI(archive) {
+        const parent = document.querySelector('.estrelas');
+        if (!parent) return;
+
+        // cria / limpa área de heart
+        let heartArea = parent.querySelector('.heart-area');
+        if (heartArea) heartArea.remove();
+
+        heartArea = document.createElement('div');
+        heartArea.className = 'heart-area';
+        Object.assign(heartArea.style, { marginLeft: '8px', display: 'flex', alignItems: 'center' });
+
+        const heartEl = document.createElement('div');
+        heartEl.className = 'favorite-heart';
+        Object.assign(heartEl.style, {
+            width: '34px',
+            height: '34px',
+            display: 'inline-block',
+            cursor: 'pointer',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '20px 20px',
+            backgroundPosition: 'center',
+            transition: 'transform 120ms ease, filter 120ms ease'
+        });
+
+        // helpers para imagens inline
+        const heartOutline = encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"><path d="M12 21s-7-4.434-9.5-7.332C-0.5 8.3 4 3 8.5 6.5 10.4 8 12 9 12 9s1.6-1 3.5-2.5C20 3 24.5 8.3 21.5 13.668 19 16.566 12 21 12 21z"/></svg>`
+        );
+        const heartFilled = encodeURIComponent(
+            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF3B30" stroke="#FF3B30"><path d="M12 21s-7-4.434-9.5-7.332C-0.5 8.3 4 3 8.5 6.5 10.4 8 12 9 12 9s1.6-1 3.5-2.5C20 3 24.5 8.3 21.5 13.668 19 16.566 12 21 12 21z"/></svg>`
+        );
+
+        // aplica estado inicial
+        const favInit = this.isArchiveFavorited(archive.id);
+        if (favInit) {
+            heartEl.style.backgroundImage = `url("data:image/svg+xml;utf8,${heartFilled}")`;
+        } else {
+            heartEl.style.backgroundImage = `url("data:image/svg+xml;utf8,${heartOutline}")`;
+        }
+
+        heartEl.addEventListener('mouseenter', () => {
+            // efeito hover visual (mostra preenchido)
+            heartEl.style.transform = 'scale(1.05)';
+            heartEl.style.backgroundImage = `url("data:image/svg+xml;utf8,${heartFilled}")`;
+        });
+
+        heartEl.addEventListener('mouseleave', () => {
+            const isFav = this.isArchiveFavorited(archive.id);
+            heartEl.style.transform = 'scale(1)';
+            heartEl.style.backgroundImage = isFav ? `url("data:image/svg+xml;utf8,${heartFilled}")` : `url("data:image/svg+xml;utf8,${heartOutline}")`;
+        });
+
+        heartEl.addEventListener('click', async () => {
+            try {
+                const rawUser = sessionStorage.getItem("usuarioCorrente");
+                if (!rawUser) throw new Error('Usuário não logado');
+                const user = JSON.parse(rawUser);
+                const UserController = (await import("../controller/userController.js")).UserController;
+                const uc = new UserController(user.id);
+                const updated = await uc.toggleFavorite(archive.id);
+                const isFav = updated.favoritos && updated.favoritos.includes(Number(archive.id));
+                heartEl.style.backgroundImage = isFav ? `url("data:image/svg+xml;utf8,${heartFilled}")` : `url("data:image/svg+xml;utf8,${heartOutline}")`;
+                this.showTemporaryMessage(isFav ? 'Favoritado' : 'Removido dos favoritos');
+            } catch (err) {
+                console.error('Erro ao favoritar', err);
+                this.showTemporaryMessage('Erro ao favoritar');
+            }
+        });
+
+        heartArea.appendChild(heartEl);
+        parent.appendChild(heartArea);
+    }
+
+    // util: verifica sessionStorage.usuarioCorrente.favoritos
+    isArchiveFavorited(archiveId) {
+        try {
+            const raw = sessionStorage.getItem('usuarioCorrente');
+            if (!raw) return false;
+            const u = JSON.parse(raw);
+            if (!u.favoritos) return false;
+            return u.favoritos.some(id => Number(id) === Number(archiveId));
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // util: pinta heart preenchido/nao
+    applyHeartState(heartEl, isFav) {
+        if (isFav) {
+            heartEl.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF3B30" stroke="#FF3B30"><path d="M12 21s-7-4.434-9.5-7.332C-0.5 8.3 4 3 8.5 6.5 10.4 8 12 9 12 9s1.6-1 3.5-2.5C20 3 24.5 8.3 21.5 13.668 19 16.566 12 21 12 21z" /></svg>`
+            )}')`;
+        } else {
+            heartEl.style.backgroundImage = `url('data:image/svg+xml;utf8,${encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"><path d="M12 21s-7-4.434-9.5-7.332C-0.5 8.3 4 3 8.5 6.5 10.4 8 12 9 12 9s1.6-1 3.5-2.5C20 3 24.5 8.3 21.5 13.668 19 16.566 12 21 12 21z" /></svg>`
+            )}')`;
+        }
+    }
+
 
     showError(message) {
         const mainInfos = document.querySelector(".mainInfos");

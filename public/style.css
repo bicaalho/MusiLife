@@ -263,7 +263,27 @@ footer {
 
 .albumInfos {
     text-align: center;
+    color: #282828;
 }
+.girdLibrary{
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.coverLibrary img{
+    width: 100%;
+    height: auto;
+    box-shadow: 0 3px 13.2px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+
+}
+.stars-wrapper .star { transition: background 120ms ease, transform 120ms ease; border-radius: 4px; }
+.stars-wrapper .star:hover { transform: translateY(-2px); }
+.favorite-heart { transition: transform .12s ease, filter .12s ease; }
+.favorite-heart:active { transform: scale(.95); }
+.rating-widget .rating-text { margin-left: 8px; color: #444; }
 
 .mainInfos {
     display: flex;
