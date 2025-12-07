@@ -10,6 +10,10 @@
 </head>
 
 <body>
+    <div id="preloader">
+  <div class="spinner"></div>
+</div>
+
     <script type="module" src="../profile.js"></script>
     <script src="../model/component/carrossel.js"></script> 
 
@@ -42,6 +46,14 @@
         </section>
 
     </main>
+    <script>
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    setTimeout(() => preloader.remove(), 500);
+  });
+</script>
+
 </body>
 
 </html>
