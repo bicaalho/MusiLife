@@ -1,12 +1,15 @@
 import { AlbumController } from "./AlbumController.js";
 import { EpController } from "./EpController.js";
 import { MusicaController } from "./MusicaController.js";
+import { DataAccess } from "../model/DataAccess/dataAccess.js";
+
 
 export class ArchivesController{
     constructor(){
         this.albumController = new AlbumController();
         this.epController = new EpController();
         this.musicaController = new MusicaController();
+        this.acesso = new DataAccess("/album");
     }    
     
     async getAll() {
@@ -62,4 +65,18 @@ export class ArchivesController{
             return [];
         }
     }
+
+   async translate(ids) {
+    const promises = ids.map(async id => {
+        try {
+            const item = await this.acesso.searchById(id);
+            return item;
+        } catch {
+            return null;
+        }
+    });
+
+    return await Promise.all(promises);
+}
+
 }

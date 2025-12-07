@@ -7,6 +7,16 @@ html, body {
   height: 100%;
 }
 
+.noto-serif-musilife {
+      font-family: "Noto Serif", serif;
+      font-optical-sizing: auto;
+      font-weight: 800;
+      font-style: normal;
+      font-variation-settings:
+        "wdth" 100;
+    }
+
+
 .emailInfo{
     color: aliceblue;
 }
@@ -253,7 +263,27 @@ footer {
 
 .albumInfos {
     text-align: center;
+    color: #282828;
 }
+.girdLibrary{
+    width: 500px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+.coverLibrary img{
+    width: 100%;
+    height: auto;
+    box-shadow: 0 3px 13.2px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+
+}
+.stars-wrapper .star { transition: background 120ms ease, transform 120ms ease; border-radius: 4px; }
+.stars-wrapper .star:hover { transform: translateY(-2px); }
+.favorite-heart { transition: transform .12s ease, filter .12s ease; }
+.favorite-heart:active { transform: scale(.95); }
+.rating-widget .rating-text { margin-left: 8px; color: #444; }
 
 .mainInfos {
     display: flex;
@@ -411,6 +441,81 @@ h1.alternativeCoverTitle{
 
 .hrTam{
     width: 90%;
+}
+.imgContainer{
+    width: 175px;
+    height: auto;
+    /* border-radius: 100%; */
+}
+
+.imgContainer img{
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+}
+
+/* PROFILE CSS */
+
+.containerProfile{
+    display: flex;
+    flex-direction: column;
+}
+
+.headProfile{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    gap: 150px
+}
+.followArea{
+    display: flex;
+    gap: 15px;
+}
+
+.btnEdit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #282828;
+    color: white;
+    border-radius: 100px;
+    padding: 4px;
+}
+
+.btnShare{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    border: 2px solid #282828;
+    color: #282828;
+    width: 100%;
+    padding: 4px;
+
+}
+
+.buttonContainer{
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+        margin-bottom: 10px;
+
+    margin-top: -36px;
+    width: 65%;
+    display: flex;
+    gap:10px;
+}
+.userInfo p,h1{
+    font-family: "Noto Serif", serif;
+    margin: 0;
+    margin-top: 3px;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 15px;
 }
 @media screen and (max-width:600px) {
     .mainInfos {
