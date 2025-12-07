@@ -4,14 +4,14 @@ export class ProfilePage {
         this.infos = document.querySelector(".profileInf");
     }
 
-    render(user) {
+    render(user, archives) {
         if (!this.infos) return;
         this.infos.innerHTML = "";
 
         const container = document.createElement("div");
         container.classList.add("containerProfile");
-        container.innerHTML = "";  
-        
+        container.innerHTML = "";
+
         const head = document.createElement("div");
         head.classList.add("headProfile");
 
@@ -27,7 +27,7 @@ export class ProfilePage {
                 <p>${user.seguidores ?? "—"} <span style="color: #828282;">Seguidores</span></p> <p>${user.seguindo} <span style="color: #828282;">Seguindo</span></p>
             </div>
             `;
-            
+
         left.appendChild(card);
 
         const right = document.createElement("div");
@@ -43,10 +43,25 @@ export class ProfilePage {
         const buttonContainer = document.createElement("div");
         buttonContainer.classList.add("buttonContainer");
 
-        buttonContainer.innerHTML =`
+        buttonContainer.innerHTML = `
             <a class="btnEdit">Editar Perfil</a>
             <a class ="btnShare">Compartilhar</a>
         `;
+        const carousel = document.createElement("carrossel-slider");
+        carousel.setAttribute("width", "500px");
+        carousel.setAttribute("height", "26px");
+
+        // desenhando itens do carrossel
+
+        carousel.draw(archives, (archive) => {
+            const wrapper = document.createElement("a");
+            const href = `../pages/details.html?type=${encodeURIComponent(archive.type || 'archive')}&id=${encodeURIComponent(archive.id)}`;
+            wrapper.href = href;
+            wrapper.innerHTML = `
+            <img src="${archive.img}" style="width:100%;height:auto;">
+        `;
+            return wrapper;
+        });
 
 
         //area dos appends
@@ -55,6 +70,7 @@ export class ProfilePage {
         head.appendChild(right);
         container.appendChild(head);
         container.appendChild(buttonContainer);
+        container.appendChild(carousel);
         this.infos.appendChild(container);
     }
 

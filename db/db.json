@@ -2,11 +2,11 @@
   "usuario": [
     {
       "id": "e7b7b5d0-b91d-4014-bcd1-9886e0213806",
-      "login": "admin",
+      "login": "bicalho",
       "senha": "123",
       "nome": "João Bicalho",
       "email": "joaobicalho03@gamil.com",
-      "favoritos": [1206014,328136527,2,146933722],
+      "favoritos": [1206014,328136527,6899610,146933722,1207252],
       "seguidores": 100,
       "seguindo": 0
     },
@@ -1243,7 +1243,7 @@
         "Intro",
         "Falling Back",
         "Texts Go Green",
-        "Currents ",
+        "Currents ",
         "A Keeper",
         "Calling My Name",
         "Sticky",

@@ -478,7 +478,8 @@ h1.alternativeCoverTitle{
 .buttonContainer{
     font-weight: 700;
     font-family: "Inter", sans-serif;
-    
+        margin-bottom: 10px;
+
     margin-top: -36px;
     width: 65%;
     display: flex;
