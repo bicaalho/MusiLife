@@ -18,9 +18,8 @@ Para cada caso a parte, o model pode tratar o dado como quiser, em sua classe, a
 ## Informações Gerais
 
 - Nome:João Gabriel de Souza Bicalho
-- Matricula: 898911
-- Proposta de projeto escolhida: Coleções de itens.
-- Breve descrição sobre seu projeto: Um site que tem um acervo de informações sobre as músicas.
+- Coleções de itens.
+- Acervo de informações sobre as músicas.
   Você pode dar um feedback das músicas do acervo.
 
 
